@@ -182,6 +182,9 @@ header {
     font-size: 14px;
     font-weight: 400;
     margin-top: 10px;
+    border: 0;
+    background-color: transparent;
+    
 }
 
 #complete-btn {
@@ -193,3 +196,70 @@ header {
     color: #FFFFFF;
     margin-top: 50px;
 }
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-body{
+    position:absolute;
+    width:408px;
+    height:242px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    border: 0;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+.modal-body > p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.modal-btn {
+    width: 127px;
+    height: 44px;
+    border-radius: 12px;
+}
+
+.cancel-btn {
+    background: #242424;
+    color: #FFFFFF;
+    border: 0;
+    margin-right: 5px;
+}
+
+.check-btn {
+    background: #C4A5FA;
+    border: 0;
+    margin-left: 5px;
+}
+
+.modal.hidden {
+    display: none;
+  }

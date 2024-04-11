@@ -44,12 +44,25 @@
                     </div>
 
                 </div>
-                <button id="modify-btn" type="button">수정하기</button>
-                <p id="withdraw">회원탈퇴</p>
-                <button id="complete-btn" type="button">수정완료</button>
+                <div class="btns">
+                    <button id="modify-btn" type="button">수정하기</button>
+                    <button id="withdraw" type="button">회원탈퇴</button>
+                    <button id="complete-btn" type="button">수정완료</button>
+                </div>
+            </div>
+            <div class="modal hidden">
+                <div class="modal-body">
+                    <h2>회원탈퇴 하시겠습니까?</h2>
+                    <p>작성된 게시글과 댓글은 삭제됩니다.</p>
+                    <div class="modal-btn-wrap">
+                        <button class="modal-btn cancel-btn" type="button">취소</button>
+                        <button class="modal-btn check-btn">확인</button>
+                    </div>
+                    
+                </div>
             </div>
         </section>
     </div>
-    
+    <script src="edit-info.js"></script>
 </body>
 </html>
