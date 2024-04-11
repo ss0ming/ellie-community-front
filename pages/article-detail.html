@@ -35,7 +35,7 @@
                     
                     <div class="btns">
                         <button class="small-btn" type="button">수정</button>
-                        <button class="small-btn" type="button">삭제</button>
+                        <button id="article-delete-btn" class="small-btn" type="button">삭제</button>
                     </div>
                 </div>
                 <hr>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="btns">
                             <button class="small-btn" type="button">수정</button>
-                            <button class="small-btn" type="button">삭제</button>
+                            <button id="comment-delete-btn" class="small-btn" type="button">삭제</button>
                         </div>
                     </div>
 
@@ -109,9 +109,29 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="article-modal hidden">
+                <div class="modal-body">
+                    <h2>게시글을 삭제하시겠습니까?</h2>
+                    <p>삭제한 내용은 복구 할 수 없습니다.</p>
+                    <div class="modal-btn-wrap">
+                        <button id="article-cancel-btn" class="modal-btn cancel-btn" type="button">취소</button>
+                        <button id="article-check-btn" class="modal-btn check-btn">확인</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="comment-modal hidden">
+                <div class="modal-body">
+                    <h2>댓글을 하시겠습니까?</h2>
+                    <p>삭제한 내용은 복구 할 수 없습니다.</p>
+                    <div class="modal-btn-wrap">
+                        <button id="comment-cancel-btn" class="modal-btn cancel-btn" type="button">취소</button>
+                        <button id="comment-check-btn" class="modal-btn check-btn">확인</button>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
-    
+    <script src="article-detail.js"></script>
 </body>
 </html>
