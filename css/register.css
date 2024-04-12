@@ -89,6 +89,7 @@ header {
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .profile > p {
@@ -163,7 +164,7 @@ header {
     margin-top: 10px;
 }
 
-#withdraw {
+#login-btn {
     font-size: 14px;
     font-weight: 400;
     margin-top: 10px;

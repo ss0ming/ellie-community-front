@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="register.css">
+    <link rel="stylesheet" type="text/css" href="/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <title>커뮤니티 - ellie.kim (김소민)</title>
 </head>
@@ -27,10 +27,11 @@
             <div class="register-box">
                 <h2>회원가입</h2>
                 <div class="profile">
-                    <div class="input-box"><p>프로필 사진*</p></div>
-
+                    <div class="input-box">
+                        <p>프로필 사진*</p>
+                        <p id="helper">* helper text</p>
+                    </div>
                     <button class="register-img-btn" type="button">+</button>
-
                 </div>
                 <div class="modify-input">
                     <div class="input-box">
@@ -55,9 +56,8 @@
                     </div>
 
                 </div>
-                <button id="modify-btn" type="button">수정하기</button>
-                <p id="withdraw">회원탈퇴</p>
-                <button id="complete-btn" type="button">수정완료</button>
+                <button id="modify-btn" type="button">회원가입</button>
+                <p id="login-btn">로그인하러 가기</p>
             </div>
         </section>
     </div>
