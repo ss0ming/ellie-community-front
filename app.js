@@ -1,8 +1,9 @@
 // express 모듈을 불러옵니다.
 import express from 'express';
-import path from 'path';
 
-const __dirname = path.resolve();
+import loginRoute from './routes/login.js'
+import memberRoute from './routes/member.js'
+import articleRoute from './routes/article.js'
 
 // express 애플리케이션을 생성합니다.
 const app = express();
@@ -22,37 +23,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!!!');
 });
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/login.html'))
-});
-
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/register.html'))
-});
-
-app.get('/member-edit', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/edit-info.html'))
-});
-
-app.get('/member-edit-pw', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/edit-pwd.html'))
-});
-
-app.get('/article-list', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/articles.html'))
-});
-
-app.get('/article-detail', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/article-detail.html'))
-});
-
-app.get('/article-edit', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/edit-article.html'))
-});
-
-app.get('/article-register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/register-article.html'))
-});
+app.use('/login', loginRoute);
+app.use('/member', memberRoute);
+app.use('/article', articleRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
