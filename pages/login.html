@@ -18,20 +18,20 @@
                 <div class="login-input">
                     <div class="input-box">
                         <p>이메일</p>
-                        <input type="text" name="email" value="이메일을 입력하세요">
+                        <input id="email-input" type="text" name="email" placeholder="이메일을 입력하세요">
                     </div>
                     <div class="input-box">
                         <p>비밀번호</p>
-                        <input type="text" name="email" value="비밀번호를 입력하세요">
-                        <p id="helper">* helper text</p>
+                        <input id="password-input" type="text" name="email" placeholder="비밀번호를 입력하세요">
+                        <div class="helper-wrap"><p id="helper"></p></div>
                     </div>
 
                 </div>
-                <button type="button">로그인</button>
-                <p id="register">회원가입</p>
+                <button class="login-btn login-btn-disabled" type="button" onclick="location.href='article'" disabled>로그인</button>
+                <p id="register" onclick="location.href='member/register'">회원가입</p>
             </div>
         </section>
     </div>
-    
+    <script src="/login.js"></script>
 </body>
 </html>
