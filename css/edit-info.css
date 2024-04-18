@@ -185,7 +185,12 @@ header {
     border: 1px solid #000000;
 }
 
-#helper {
+.helper-wrap {
+    width: 355px;
+    text-align: left;
+}
+
+.helper {
     color: #FF0000;
     font-size: 12px;
     font-weight: 400;
@@ -212,7 +217,8 @@ header {
     
 }
 
-#complete-btn {
+#toast-message {
+    opacity: 0;
     width: 102px;
     height: 46px;
     border: 0;
@@ -220,6 +226,14 @@ header {
     background-color: #ACA0EB;
     color: #FFFFFF;
     margin-top: 50px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    transition: all 0.5s;
+}
+
+#toast-message.active {
+    opacity: 100%;
 }
 
 .btns {

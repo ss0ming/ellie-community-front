@@ -44,15 +44,15 @@
                     </div>
                     <div class="input-box">
                         <p>닉네임</p>
-                        <input type="text" name="nickname" value="스타트업코드">
-                        <p id="helper">* helper text</p>
+                        <input id="nickname-input" type="text" name="nickname" placeholder="스타트업코드">
+                        <div class="helper-wrap"><p id="nickname-helper" class="helper"></p></div>
                     </div>
 
                 </div>
                 <div class="btns">
                     <button id="modify-btn" type="button">수정하기</button>
                     <button id="withdraw" type="button">회원탈퇴</button>
-                    <button id="complete-btn" type="button">수정완료</button>
+                    <div id="toast-message">수정완료</div>
                 </div>
             </div>
             <div class="modal hidden">
