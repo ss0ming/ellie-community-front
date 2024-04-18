@@ -75,6 +75,9 @@ header {
 .modify-box {
     padding-bottom: 60px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .modify-box > h2 {
@@ -115,7 +118,12 @@ header {
     border: 1px solid #000000;
 }
 
-#helper {
+.helper-wrap {
+    width: 355px;
+    text-align: left;
+}
+
+.helper {
     color: #FF0000;
     font-size: 12px;
     font-weight: 400;
@@ -123,12 +131,35 @@ header {
     margin-bottom: 0;
 }
 
-button {
+.modify-btn {
     width: 355px;
     height: 33px;
-    background-color: #ACA0EB;
+    background-color: #7F6AEE;
     border-radius: 4px;
     border: 0;
     color: #FFFFFF;
     margin-top: 10px;
+}
+
+.modify-btn.modify-btn-disabled {
+    background-color: #ACA0EB;
+}
+
+#toast-message {
+    opacity: 0;
+    width: 102px;
+    height: 46px;
+    border: 0;
+    border-radius: 30px; 
+    background-color: #ACA0EB;
+    color: #FFFFFF;
+    margin-top: 50px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    transition: all 0.5s;
+}
+
+#toast-message.active {
+    opacity: 100%;
 }

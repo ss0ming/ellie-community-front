@@ -29,20 +29,21 @@
                 <div class="pwd-input">
                     <div class="input-box">
                         <p>비밀번호</p>
-                        <input type="text" name="password" value="비밀번호를 입력하세요">
-                        <p id="helper">* helper text</p>
+                        <input id="password-input" type="text" name="password" placeholder="비밀번호를 입력하세요">
+                        <div class="helper-wrap"><p id="password-helper" class="helper"></p></div>
                     </div>
                     <div class="input-box">
                         <p>비밀번호 확인</p>
-                        <input type="text" name="password_repeat" value="비밀번호를 한번 더 입력하세요">
-                        <p id="helper">* helper text</p>
+                        <input id="repeat-input" type="text" name="password_repeat" placeholder="비밀번호를 한번 더 입력하세요">
+                        <div class="helper-wrap"><p id="repeat-helper" class="helper"></p></div>
                     </div>
 
                 </div>
-                <button type="button">수정하기</button>
+                <button class="modify-btn modify-btn-disabled" type="button" disabled>수정하기</button>
+                <div id="toast-message">수정완료</div>
             </div>
         </section>
     </div>
-    
+    <script src="/edit-pwd.js"></script>
 </body>
 </html>
