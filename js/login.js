@@ -9,7 +9,7 @@ const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,20}$/;
 email.addEventListener("input", validate);
 password.addEventListener("input", validate);
 
-function validate() {    
+function validate() {
     if (!makeHelperMessage(email.value, password.value)) {
         loginBtn.disabled = true;
         loginBtn.classList.add("login-btn-disabled");
@@ -17,7 +17,6 @@ function validate() {
         loginBtn.disabled = true;
         loginBtn.classList.add("login-btn-disabled"); 
     } else {
-        console.log("3");
         loginBtn.disabled = false;
         loginBtn.classList.remove("login-btn-disabled");
     }
