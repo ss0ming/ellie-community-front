@@ -29,38 +29,38 @@
                 <div class="profile">
                     <div class="input-box">
                         <p>프로필 사진*</p>
-                        <p id="helper">* helper text</p>
+                        <div class="helper-wrap"><p class="helper">* helper text</p></div>
                     </div>
                     <button class="register-img-btn" type="button">+</button>
                 </div>
                 <div class="modify-input">
                     <div class="input-box">
                         <p>이메일*</p>
-                        <input type="text" name="email" value="이메일을 입력하세요">
-                        <p id="helper">* helper text</p>
+                        <input id="email-input" type="text" name="email" placeholder="이메일을 입력하세요">
+                        <div class="helper-wrap"><p id="email-helper" class="helper"></p></div>
                     </div>
                     <div class="input-box">
                         <p>비밀번호*</p>
-                        <input type="text" name="pwd" value="비밀번호를 입력하세요">
-                        <p id="helper">* helper text</p>
+                        <input id="password-input" type="text" name="pwd" placeholder="비밀번호를 입력하세요">
+                        <div class="helper-wrap"><p id="password-helper" class="helper"></p></div>
                     </div>
                     <div class="input-box">
                         <p>비밀번호 확인*</p>
-                        <input type="text" name="pwd_repeat" value="비밀번호를 한번 더 입력하세요">
-                        <p id="helper">* helper text</p>
+                        <input id="repeat-input" type="text" name="pwd_repeat" placeholder="비밀번호를 한번 더 입력하세요">
+                        <div class="helper-wrap"><p id="repeat-helper" class="helper"></p></div>
                     </div>
                     <div class="input-box">
                         <p>닉네임*</p>
-                        <input type="text" name="nickname" value="닉네임을 입력하세요">
-                        <p id="helper">* helper text</p>
+                        <input id="nickname-input" type="text" name="nickname" placeholder="닉네임을 입력하세요">
+                        <div class="helper-wrap"><p id="nickname-helper" class="helper"></p></div>
                     </div>
 
                 </div>
-                <button id="modify-btn" type="button">회원가입</button>
-                <p id="login-btn">로그인하러 가기</p>
+                <button class="register-btn register-btn-disabled" type="button" onclick="location.href='../login'" disabled>회원가입</button>
+                <p id="login-btn" onclick="location.href='../login'">로그인하러 가기</p>
             </div>
         </section>
     </div>
-    
+    <script src="/register.js"></script>
 </body>
 </html>
