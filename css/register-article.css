@@ -139,12 +139,12 @@ hr {
     margin-top: 5px;
 }
 
-.helper-box {
+.helper-wrap {
     width: 100%;
     text-align: left;
 }
 
-#helper {
+.helper {
     color: #FF0000;
     font-size: 12px;
     font-weight: 400;
@@ -157,7 +157,7 @@ hr {
     margin-top: 5px;
 }
 
-button {
+.register-btn {
     width: 355px;
     height: 33px;
     font-size: 14px;
@@ -169,4 +169,8 @@ button {
     background-color: #7F6AEE;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.register-btn.register-btn-disable {
+    background-color: #ACA0EB;
 }

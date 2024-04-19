@@ -31,7 +31,7 @@
                 </div>
                 <hr>
                 <div class="inner-wrap title-wrap">
-                    <textarea id="title-input" type="text" cols rows="4" placeholder="제목을 입력해주세요. (최대 26글자)"></textarea>
+                    <textarea id="title-input" type="text" cols rows="4" placeholder="제목을 입력해주세요. (최대 26글자)" maxlength='26'></textarea>
                 </div>
                 <hr>
                 <div class="inner-wrap">
@@ -43,14 +43,15 @@
                 </div>
                 <hr>
                 <div class="inner-wrap img-wrap">
-                    <div class="helper-box"><p id="helper">* helper text</p></div>
+                    <div class="helper-wrap"><p id="helper-text" class="helper"></p></div>
                     <div class="field"><p>이미지</p></div>
                     <div class="file-box">
                         <input type="file" value="파일 선택"> 
                     </div>
                 </div>
-                <button type="button">완료</button>
+                <button class="register-btn register-btn-disable" type="button" disabled>완료</button>
             </div>
         </section>
     </div>
+    <script src="/register-article.js"></script>
 </body>
