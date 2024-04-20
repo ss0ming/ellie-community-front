@@ -12,6 +12,7 @@ const port = 3000;
 
 app.use(express.static('css'))
 app.use(express.static('js'))
+app.use(express.static('data'))
 
 /**
 * 루트 경로('/')에 대한 GET 요청을 처리
