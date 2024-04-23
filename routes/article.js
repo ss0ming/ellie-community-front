@@ -10,7 +10,7 @@ const __dirname = path.resolve();
 router.get('/', (req, res) => res.sendFile(path.join(__dirname, 'pages/articles.html')));
 
 // 아래 주소는 `/article/detail` 이 됩니다.
-router.get('/detail', (req, res) => res.sendFile(path.join(__dirname, 'pages/article-detail.html')));
+router.get('/:id', (req, res) => res.sendFile(path.join(__dirname, 'pages/article-detail.html')));
 
 // 아래 주소는 `/article/edit` 이 됩니다.
 router.get('/edit', (req, res) => res.sendFile(path.join(__dirname, 'pages/edit-article.html')));
