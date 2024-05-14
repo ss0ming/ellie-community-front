@@ -97,18 +97,25 @@ header {
     margin-bottom: 15px;
 }
 
-.title-wrap > p {
-font-size: 16px;
-font-weight: 700;
-text-align: left;
-
+.title-wrap > #title-input {
+    background-color: #F4F5F7;
+    height: 20px;
+    border: 0;
+    resize: none;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
 }
  
 .content-wrap {
     margin-top: 15px;
 }
 
-.content-wrap > p {
+.content-wrap > #content-input {
+    background-color: #F4F5F7;
+    height: 200px;
+    border: 0;
+    resize: none;
     text-align: left;
     font-size: 15px;
     font-weight: 400;
@@ -130,12 +137,13 @@ hr {
     margin-top: 5px;
 }
 
-.helper-box {
+.helper-wrap {
     width: 100%;
+    height: 30px;
     text-align: left;
 }
 
-#helper {
+.helper {
     color: #FF0000;
     font-size: 12px;
     font-weight: 400;
@@ -148,7 +156,7 @@ hr {
     margin-top: 5px;
 }
 
-button {
+.edit-btn {
     width: 355px;
     height: 33px;
     font-size: 14px;
@@ -160,4 +168,8 @@ button {
     background-color: #7F6AEE;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.edit-btn.edit-btn-disable {
+    background-color: #ACA0EB;
 }

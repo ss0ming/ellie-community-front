@@ -26,7 +26,6 @@ modalCloseButton2.addEventListener('click', () => {
 
 dropdownBtn.addEventListener('click', () => {
     dropdownContent.classList.toggle('active');
-    console.log("실행완료");
 })
 
 // 수정 완료 버튼 클릭 시 토스트 생성

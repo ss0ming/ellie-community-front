@@ -1,4 +1,13 @@
-fetch("/article.json")
+// 헤더 프로필
+const dropdownBtn = document.querySelector(".header-profile-img");
+const dropdownContent = document.querySelector(".dropdown-content");
+
+// 프로필 클릭시
+dropdownBtn.addEventListener('click', () => {
+    dropdownContent.classList.toggle('active');
+})
+
+fetch("http://localhost:8000/articles")
     .then((res) => res.json())
     .then((articles) => {
         articles.forEach((article) => {

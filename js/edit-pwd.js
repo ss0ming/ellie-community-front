@@ -9,11 +9,20 @@ const repeatHelper = document.getElementById('repeat-helper');
 
 const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,20}$/;
 
+// 헤더 프로필
+const dropdownBtn = document.querySelector(".header-profile-img");
+const dropdownContent = document.querySelector(".dropdown-content");
+
 password.addEventListener("input", passwordValidCheck);
 repeat.addEventListener("input", repeatValidCheck);
 
 password.addEventListener("input", validate);
 repeat.addEventListener("input", validate);
+
+// 프로필 클릭시
+dropdownBtn.addEventListener('click', () => {
+    dropdownContent.classList.toggle('active');
+})
 
 function validate() {
     if (!(password.value && repeat.value)) {

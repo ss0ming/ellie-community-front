@@ -9,13 +9,13 @@ const __dirname = path.resolve();
 // 람다식 내 코드가 한 줄인 경우 가독성을 위해 simplify를 진행할 수 있습니다.
 router.get('/', (req, res) => res.sendFile(path.join(__dirname, 'pages/articles.html')));
 
-// 아래 주소는 `/article/detail` 이 됩니다.
-router.get('/:id', (req, res) => res.sendFile(path.join(__dirname, 'pages/article-detail.html')));
-
 // 아래 주소는 `/article/edit` 이 됩니다.
-router.get('/edit', (req, res) => res.sendFile(path.join(__dirname, 'pages/edit-article.html')));
+router.get('/:id/edit', (req, res) => res.sendFile(path.join(__dirname, 'pages/edit-article.html')));
 
 // 아래 주소는 `/article/register` 이 됩니다.
 router.get('/register', (req, res) => res.sendFile(path.join(__dirname, 'pages/register-article.html')));
+
+// 아래 주소는 `/article/detail` 이 됩니다.
+router.get('/:id', (req, res) => res.sendFile(path.join(__dirname, 'pages/article-detail.html')));
 
 export default router;

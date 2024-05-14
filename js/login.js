@@ -9,6 +9,40 @@ const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,20}$/;
 email.addEventListener("input", validate);
 password.addEventListener("input", validate);
 
+loginBtn.addEventListener("click", clickLoginBtn);
+
+function clickLoginBtn() {
+    const login = {
+        email: email.value,
+        password: password.value
+    };
+
+    fetch("http://localhost:8000/members/login", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(login)
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        if (res.status == 200) {
+            location.href="http://localhost:3000/article";
+        }
+        return res.json();
+    })
+    .then(data => {
+        console.log('Response from server:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        helperText.innerHTML = '* 아이디 및 비밀번호를 확인해주세요.';
+    });
+}
+
 function validate() {
     if (!makeHelperMessage(email.value, password.value)) {
         loginBtn.disabled = true;

@@ -34,6 +34,7 @@ header {
     width: 544px;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .arrow-back {
@@ -62,6 +63,30 @@ header {
     font-weight: 400;
     font-size: 32px;
     text-align: center;
+}
+
+.dropdown-content {
+    position: absolute;
+    right: 0px;
+    top: 50px;
+    display: none;
+}
+
+.dropdown-content.active {
+    display: block;
+}
+
+.dropdown-menu {
+    width: 115px;
+    height: 35px;
+    background-color: #D9D9D9;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+.dropdown-menu:hover {
+    background-color: #E9E9E9;
 }
 
 .wrap {
@@ -192,7 +217,7 @@ hr {
     margin-bottom: 20px;
 }
 
-.comment-register {
+.comment-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -204,7 +229,7 @@ hr {
     margin-bottom: 20px;
 }
 
-.comment-register > textarea {
+.comment-box > textarea {
     width: 544px;
     height: 94px;
     font-size: 15px;
@@ -214,12 +239,12 @@ hr {
     resize: none;
 }
 
-#register-btn {
+.comment-big-btn {
     width: 138px;
     height: 39px;
     border-radius: 16px;
     border: 0;
-    background-color: #ACA0EB;
+    background-color: #7F6AEE;
     font-size: 16px;
     font-weight: 700;
     color: #FFFFFF;
@@ -227,6 +252,14 @@ hr {
     margin-left: auto;
     margin-right: 24px;
     margin-bottom: 10px;
+}
+
+.comment-register-disable {
+    background-color: #ACA0EB;
+}
+
+.comment-modify-disable {
+    background-color: #ACA0EB;
 }
 
 #comment-hr {
@@ -324,10 +357,6 @@ hr {
     margin-left: 5px;
 }
 
-.article-modal.hidden {
-    display: none;
-}
-
-.comment-modal.hidden {
+.hidden {
     display: none;
 }

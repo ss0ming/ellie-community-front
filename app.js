@@ -4,6 +4,7 @@ import express from 'express';
 import loginRoute from './routes/login.js'
 import memberRoute from './routes/member.js'
 import articleRoute from './routes/article.js'
+import errorRoute from './routes/error.js';
 
 // express 애플리케이션을 생성합니다.
 const app = express();
@@ -27,6 +28,8 @@ app.get('/', (req, res) => {
 app.use('/login', loginRoute);
 app.use('/member', memberRoute);
 app.use('/article', articleRoute);
+
+app.use('/404', errorRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

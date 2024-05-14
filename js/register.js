@@ -32,6 +32,40 @@ password.addEventListener("focusout", validate);
 repeat.addEventListener("focusout", validate);
 nickname.addEventListener("focusout", validate);
 
+
+registerBtn.addEventListener("click", clickRegisterBtn)
+
+// 회원가입 버튼 클릭시
+function clickRegisterBtn() {
+    const newMember = {
+        email: email.value,
+        password: password.value,
+        nickname: nickname.value
+    };
+
+    fetch("http://localhost:8000/members", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newMember)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            res.json();
+            location.href="http://localhost:3000/login";
+        })
+        .then(data => {
+            console.log('Response from server:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+// 회원 가입 버튼 활성화/비활성화
 function validate() {
     if (!emailValidCheck()) {
         registerBtn.disabled = true;
@@ -56,12 +90,16 @@ function validate() {
 
 }
 
-function emailValidCheck() {
+// 이메일 유효성 검사
+async function emailValidCheck() {
     if (!email.value) {
         emailHelper.innerHTML = '* 이메일을 입력해주세요.';
         return false;
     } else if (emailPattern.test(email.value) == false) {
         emailHelper.innerHTML = '* 올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)';
+        return false;
+    } else if (!(await emailDuplicationCheck())) {
+        emailHelper.innerHTML = '* 중복된 이메일 입니다.';
         return false;
     }
 
@@ -69,6 +107,7 @@ function emailValidCheck() {
     return true;
 }
 
+// 비밀 번호 유효성 검사
 function passwordValidCheck() {
     if (!password.value) {
         passwordHelper.innerHTML = '* 비밀번호를 입력해주세요.';
@@ -85,6 +124,7 @@ function passwordValidCheck() {
     return true;
 }
 
+// 비밀번호 확인 유효성 검사
 function repeatValidCheck() {
     if (!repeat.value) {
         repeatHelper.innerHTML = '* 비밀번호를 입력해주세요.'
@@ -98,7 +138,8 @@ function repeatValidCheck() {
     return true;
 }
 
-function nicknameValidCheck() {
+// 닉네임 유효성 검사
+async function nicknameValidCheck() {
     if (!nickname.value) {
         nicknameHelper.innerHTML = '* 닉네임을 입력해주세요.';
         return false;
@@ -108,8 +149,60 @@ function nicknameValidCheck() {
     } else if (nickname.value.length > 10) {
         nicknameHelper.innerHTML = '* 닉네임은 최대 10자까지 가능합니다.';
         return false;
+    } else if (!(await nicknameDuplicationCheck())) {
+        nicknameHelper.innerHTML = '* 중복된 닉네임 입니다.';
+        return false;
     }
 
     nicknameHelper.innerHTML = '';
     return true;
+}
+
+// 이메일 중복 체크
+async function emailDuplicationCheck() {
+    try {
+        const response = await fetch("http://localhost:8000/members/checkEmail", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email.value })
+        });
+
+        if (!response.ok) {
+            if (response.status === 400) {
+                return false; // 중복된 이메일
+            }
+            throw new Error('Network response was not ok');
+        }
+        return true; // 사용 가능한 이메일
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        return false; // 네트워크 오류 시 안전하게 처리
+    }
+}
+
+// 닉네임 중복 체크
+async function nicknameDuplicationCheck() {
+    try {
+        const response = await fetch("http://localhost:8000/members/checkNickname", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nickname: nickname.value })
+        });
+
+        if (!response.ok) {
+            if (response.status === 400) {
+                return false;
+            }
+            throw new Error('Network response was not ok');
+        }
+        return true;
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        return false;
+    }
+
 }

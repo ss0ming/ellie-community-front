@@ -1,4 +1,7 @@
-const registerBtn = document.querySelector('.register-btn');
+const url = window.location.pathname;
+const articleId = url.substring(0, url.length-5).split('/').pop();
+
+const editBtn = document.querySelector('.edit-btn');
 
 const title = document.getElementById('title-input');
 const content = document.getElementById('content-input');
@@ -8,25 +11,35 @@ const helperText = document.getElementById('helper-text');
 title.addEventListener("input", validate);
 content.addEventListener("input", validate);
 
-registerBtn.addEventListener("click", clickRegisterBtn);
+editBtn.addEventListener("click", clickEditBtn);
 
-function clickRegisterBtn() {
+console.log(articleId);
+
+fetch("http://localhost:8000/articles/" + articleId)
+    .then((res) => res.json())
+    .then((article) => {
+        title.value = article.title;
+        content.value = article.content;
+    });
+
+
+function clickEditBtn() {
     if (!validate()) {
         helperText.innerHTML = '* 제목, 내용을 모두 작성해주세요';
     } else {
         helperText.innerHTML ='';
 
-        const newArticle = {
+        const editArticle = {
             title: title.value,
             content: content.value
-        };
+        }
 
-        fetch("http://localhost:8000/articles", {
-            method: 'POST',
+        fetch("http://localhost:8000/articles/" + articleId, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newArticle)
+            body: JSON.stringify(editArticle)
         })
         .then(res => {
             if (!res.ok) {
@@ -46,12 +59,12 @@ function clickRegisterBtn() {
 
 function validate() {
     if (!(title.value && content.value)) {
-        registerBtn.disabled = false;
-        registerBtn.classList.remove("register-btn-disable");
+        editBtn.disabled = false;
+        editBtn.classList.remove("edit-btn-disable");
         return false;
     } else {
-        registerBtn.disabled = false;
-        registerBtn.classList.remove("register-btn-disable");
+        editBtn.disabled = false;
+        editBtn.classList.remove("edit-btn-disable");
         return true;
     }
 }
