@@ -32,7 +32,7 @@ fetch("http://localhost:8000/articles")
         });
     });
 
-function calculateNum(num) {
+const calculateNum = num => {
     if (num < 1000) {
         return num;
     } else if (num >= 1000 && num <10000) {

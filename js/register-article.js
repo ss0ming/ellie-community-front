@@ -10,7 +10,7 @@ content.addEventListener("input", validate);
 
 registerBtn.addEventListener("click", clickRegisterBtn);
 
-function clickRegisterBtn() {
+const clickRegisterBtn = () => {
     if (!validate()) {
         helperText.innerHTML = '* 제목, 내용을 모두 작성해주세요';
     } else {
@@ -44,7 +44,7 @@ function clickRegisterBtn() {
     }
 }
 
-function validate() {
+const validate = () => {
     if (!(title.value && content.value)) {
         registerBtn.disabled = false;
         registerBtn.classList.remove("register-btn-disable");

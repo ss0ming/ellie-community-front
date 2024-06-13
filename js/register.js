@@ -17,26 +17,8 @@ const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,20}$/;
 const blankPattern = /[\s]/g;
 
-email.addEventListener("input", emailValidCheck);
-password.addEventListener("input", passwordValidCheck);
-repeat.addEventListener("input", repeatValidCheck);
-nickname.addEventListener("input", nicknameValidCheck);
-
-email.addEventListener("input", validate);
-password.addEventListener("input", validate);
-repeat.addEventListener("input", validate);
-nickname.addEventListener("input", validate);
-
-email.addEventListener("focusout", validate);
-password.addEventListener("focusout", validate);
-repeat.addEventListener("focusout", validate);
-nickname.addEventListener("focusout", validate);
-
-
-registerBtn.addEventListener("click", clickRegisterBtn)
-
 // 회원가입 버튼 클릭시
-function clickRegisterBtn() {
+const clickRegisterBtn = () => {
     const newMember = {
         email: email.value,
         password: password.value,
@@ -66,7 +48,7 @@ function clickRegisterBtn() {
 }
 
 // 회원 가입 버튼 활성화/비활성화
-function validate() {
+const validate = () => {
     if (!emailValidCheck()) {
         registerBtn.disabled = true;
         registerBtn.classList.add("register-btn-disabled");
@@ -91,7 +73,7 @@ function validate() {
 }
 
 // 이메일 유효성 검사
-async function emailValidCheck() {
+const emailValidCheck = async () => {
     if (!email.value) {
         emailHelper.innerHTML = '* 이메일을 입력해주세요.';
         return false;
@@ -108,7 +90,7 @@ async function emailValidCheck() {
 }
 
 // 비밀 번호 유효성 검사
-function passwordValidCheck() {
+const passwordValidCheck = () => {
     if (!password.value) {
         passwordHelper.innerHTML = '* 비밀번호를 입력해주세요.';
         return false;
@@ -139,7 +121,7 @@ function repeatValidCheck() {
 }
 
 // 닉네임 유효성 검사
-async function nicknameValidCheck() {
+const nicknameValidCheck = async () => {
     if (!nickname.value) {
         nicknameHelper.innerHTML = '* 닉네임을 입력해주세요.';
         return false;
@@ -159,7 +141,7 @@ async function nicknameValidCheck() {
 }
 
 // 이메일 중복 체크
-async function emailDuplicationCheck() {
+const emailDuplicationCheck = async () => {
     try {
         const response = await fetch("http://localhost:8000/members/checkEmail", {
             method: 'POST',
@@ -183,7 +165,7 @@ async function emailDuplicationCheck() {
 }
 
 // 닉네임 중복 체크
-async function nicknameDuplicationCheck() {
+const nicknameDuplicationCheck = async () => {
     try {
         const response = await fetch("http://localhost:8000/members/checkNickname", {
             method: 'POST',
@@ -206,3 +188,21 @@ async function nicknameDuplicationCheck() {
     }
 
 }
+
+email.addEventListener("input", emailValidCheck);
+password.addEventListener("input", passwordValidCheck);
+repeat.addEventListener("input", repeatValidCheck);
+nickname.addEventListener("input", nicknameValidCheck);
+
+email.addEventListener("input", validate);
+password.addEventListener("input", validate);
+repeat.addEventListener("input", validate);
+nickname.addEventListener("input", validate);
+
+email.addEventListener("focusout", validate);
+password.addEventListener("focusout", validate);
+repeat.addEventListener("focusout", validate);
+nickname.addEventListener("focusout", validate);
+
+
+registerBtn.addEventListener("click", clickRegisterBtn);

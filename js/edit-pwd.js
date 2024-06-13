@@ -13,18 +13,7 @@ const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,20}$/;
 const dropdownBtn = document.querySelector(".header-profile-img");
 const dropdownContent = document.querySelector(".dropdown-content");
 
-password.addEventListener("input", passwordValidCheck);
-repeat.addEventListener("input", repeatValidCheck);
-
-password.addEventListener("input", validate);
-repeat.addEventListener("input", validate);
-
-// 프로필 클릭시
-dropdownBtn.addEventListener('click', () => {
-    dropdownContent.classList.toggle('active');
-})
-
-function validate() {
+const validate = () => {
     if (!(password.value && repeat.value)) {
         modifyBtn.disabled = true;
         modifyBtn.classList.add("modify-btn-disabled");
@@ -41,7 +30,7 @@ function validate() {
     
 }
 
-function passwordValidCheck() {
+const passwordValidCheck = () => {
     if (!password.value) {
         passwordHelper.innerHTML = '* 비밀번호를 입력해주세요.';
         return false;
@@ -57,7 +46,7 @@ function passwordValidCheck() {
     return true;
 }
 
-function repeatValidCheck() {
+const repeatValidCheck = () => {
     if (!repeat.value) {
         repeatHelper.innerHTML = '* 비밀번호를 입력해주세요.'
         return false;
@@ -70,12 +59,23 @@ function repeatValidCheck() {
     return true;
 }
 
-function comparePassword() {
+const comparePassword = () => {
     if (repeat.value != password.value) {
         return false;
     }
     return true;
 }
+
+password.addEventListener("input", passwordValidCheck);
+repeat.addEventListener("input", repeatValidCheck);
+
+password.addEventListener("input", validate);
+repeat.addEventListener("input", validate);
+
+// 프로필 클릭시
+dropdownBtn.addEventListener('click', () => {
+    dropdownContent.classList.toggle('active');
+})
 
 modifyBtn.addEventListener('click', () => {
     toastMessage.classList.add('active');

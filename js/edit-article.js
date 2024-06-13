@@ -8,22 +8,7 @@ const content = document.getElementById('content-input');
 
 const helperText = document.getElementById('helper-text');
 
-title.addEventListener("input", validate);
-content.addEventListener("input", validate);
-
-editBtn.addEventListener("click", clickEditBtn);
-
-console.log(articleId);
-
-fetch("http://localhost:8000/articles/" + articleId)
-    .then((res) => res.json())
-    .then((article) => {
-        title.value = article.title;
-        content.value = article.content;
-    });
-
-
-function clickEditBtn() {
+const clickEditBtn = () => {
     if (!validate()) {
         helperText.innerHTML = '* 제목, 내용을 모두 작성해주세요';
     } else {
@@ -57,7 +42,7 @@ function clickEditBtn() {
     }
 }
 
-function validate() {
+const validate = () => {
     if (!(title.value && content.value)) {
         editBtn.disabled = false;
         editBtn.classList.remove("edit-btn-disable");
@@ -68,3 +53,17 @@ function validate() {
         return true;
     }
 }
+
+title.addEventListener("input", validate);
+content.addEventListener("input", validate);
+
+editBtn.addEventListener("click", clickEditBtn);
+
+console.log(articleId);
+
+fetch("http://localhost:8000/articles/" + articleId)
+    .then((res) => res.json())
+    .then((article) => {
+        title.value = article.title;
+        content.value = article.content;
+    });

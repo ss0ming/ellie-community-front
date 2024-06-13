@@ -6,12 +6,7 @@ const helperText = document.getElementById('helper');
 const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,20}$/;
 
-email.addEventListener("input", validate);
-password.addEventListener("input", validate);
-
-loginBtn.addEventListener("click", clickLoginBtn);
-
-function clickLoginBtn() {
+const clickLoginBtn = () => {
     const login = {
         email: email.value,
         password: password.value
@@ -43,7 +38,7 @@ function clickLoginBtn() {
     });
 }
 
-function validate() {
+const validate = () => {
     if (!makeHelperMessage(email.value, password.value)) {
         loginBtn.disabled = true;
         loginBtn.classList.add("login-btn-disabled");
@@ -56,7 +51,7 @@ function validate() {
     }
 }
 
-function makeHelperMessage(email, password) {
+const makeHelperMessage = (email, password) => {
     if (!emailValidCheck(email)) {
         helperText.innerHTML = '* 올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)';
         return false;
@@ -72,16 +67,21 @@ function makeHelperMessage(email, password) {
     return true;
 }
 
-function emailValidCheck(email) {
+const emailValidCheck = (email) => {
     if (emailPattern.test(email) == false) {
         return false;
     }
     return true;
 }
 
-function passwordValidCheck(password) {
+const passwordValidCheck = (password) => {
     if (passwordPattern.test(password) == false) {
         return false;
     }
     return true;
 }
+
+email.addEventListener("input", validate);
+password.addEventListener("input", validate);
+
+loginBtn.addEventListener("click", clickLoginBtn);

@@ -71,7 +71,7 @@ fetch("http://localhost:8000/articles/" + articleId + "/comments")
     });
 
 // 댓글 박스 추가 
-function addCommentBox(comment) {
+const addCommentBox = (comment) => {
     const temp = document.createElement("div");
     temp.innerHTML = `<div class="comment" data-id="${comment.id}">
             <div class="comment-wrap-top">
@@ -102,7 +102,7 @@ function addCommentBox(comment) {
     addCommentDeleteEvent(deleteButton);
 }
 
-function commentModifyValidate() {
+const commentModifyValidate = () => {
     if (!commentModify.value) {
         commentModifyButton.disabled = true;
         commentModifyButton.classList.add("comment-modify-disable");
@@ -113,7 +113,7 @@ function commentModifyValidate() {
 }
 
 // 댓글 수정 이벤트
-function addCommentEditEvent(button) {
+const addCommentEditEvent = (button) => {
     button.addEventListener('click', () => {
         commentRegisterBox.classList.add('hidden');
         commentModifyBox.classList.remove('hidden');
@@ -138,7 +138,7 @@ function addCommentEditEvent(button) {
 }
 
 // 댓글 삭제 이벤트
-function addCommentDeleteEvent(button) {
+const addCommentDeleteEvent = (button) => {
     button.addEventListener('click', (e) => {
         const target = e.target.closest('.comment');
 
@@ -175,6 +175,16 @@ function addCommentDeleteEvent(button) {
 }
 
 // 댓글 등록 이벤트
+const commentRegisterValidate = () => {
+    if (!comment.value) {
+        commentRegisterButton.disabled = true;
+        commentRegisterButton.classList.add("comment-register-disable");
+    } else {
+        commentRegisterButton.disabled = false;
+        commentRegisterButton.classList.remove("comment-register-disable");
+    }
+}
+
 comment.addEventListener('input', commentRegisterValidate);
 
 commentRegisterButton.addEventListener('click', (e) => {
@@ -206,16 +216,6 @@ commentRegisterButton.addEventListener('click', (e) => {
         });
     }
 });
-
-function commentRegisterValidate() {
-    if (!comment.value) {
-        commentRegisterButton.disabled = true;
-        commentRegisterButton.classList.add("comment-register-disable");
-    } else {
-        commentRegisterButton.disabled = false;
-        commentRegisterButton.classList.remove("comment-register-disable");
-    }
-}
 
 // 댓글 수정 후 이벤트
 commentModify.addEventListener('input', commentModifyValidate);
@@ -298,24 +298,24 @@ articleEditBtn.addEventListener('click', () => {
 })
 
 // 댓글 등록 박스 초기화
-function resetCommentRegister() {
+const resetCommentRegister = () => {
     comment.value = '';
     commentRegisterButton.disabled = true;
     commentRegisterButton.classList.add("comment-register-disable");
 }
 
 // 댓글 수정 박스 초기화
-function resetCommentModify() {
+const resetCommentModify = () => {
     commentModify.innerHTML = '';
 }
 
-function calculateNum(num) {
+const calculateNum = num => {
     if (num < 1000) {
         return num;
-    } else if (num >= 1000 && num <10000) {
+    } else if (num >= 1000 && num < 10000) {
         return "1k";
-    } else if (num >= 10000 && num <100000) {
+    } else if (num >= 10000 && num < 100000) {
         return "10k";
     }
     return "100k";
-}
+};
