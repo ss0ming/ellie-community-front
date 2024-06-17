@@ -31,6 +31,8 @@ const clickLoginBtn = () => {
     })
     .then(data => {
         console.log('Response from server:', data);
+        const userString = JSON.stringify(data);
+        window.localStorage.setItem("user", userString);
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);

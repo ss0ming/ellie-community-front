@@ -17,7 +17,7 @@ fetch("http://localhost:8000/articles")
                         <h2>${article.title}</h2>
                         <div class="list-info">
                             <p>좋아요 ${calculateNum(article.likes)}  댓글 ${calculateNum(article.comment_count)}  조회수 ${calculateNum(article.view_count)}</p>
-                            <div class="datetime"><p>${article.date_time}</p></div>
+                            <div class="datetime"><p>${article.created_at}</p></div>
                         </div>
                     </div>
                     <hr>
