@@ -14,6 +14,7 @@ const clickLoginBtn = () => {
 
     fetch("http://localhost:8000/members/login", {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
