@@ -89,6 +89,17 @@ header {
     background-color: #E9E9E9;
 }
 
+.login-btn {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    width: 50px;
+    height: 27px;
+    border-radius: 8px;
+    border: 1px solid #ACA0EB;
+    margin-top: 7px;
+}
+
 .wrap {
     display: flex;
     flex-direction: column;

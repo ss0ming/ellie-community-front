@@ -1,4 +1,4 @@
-import { checkLoginStatus } from './auth.js';
+import { checkLoginStatus, logout } from './auth.js';
 
 const url = window.location.pathname;
 const articleId = url.split('/').pop();
@@ -15,10 +15,20 @@ const init = async () => {
     // 헤더 프로필
     const dropdownBtn = document.querySelector(".header-profile-img");
     const dropdownContent = document.querySelector(".dropdown-content");
+    const loginBtn = document.querySelector(".login-btn");
+    const logoutBtn = document.querySelector(".logout-btn");
+
+    if (userId !== -1) {
+        loginBtn.classList.add('hidden');
+        dropdownBtn.classList.remove('hidden');
+    } else {
+        loginBtn.classList.remove('hidden');
+        dropdownBtn.classList.add('hidden');
+    }
 
     // 게시글 관련 버튼
     const articleEditBtn = document.getElementById('article-edit-btn');
-    const articleDeleteModalOpenButton = document.querySelector('#article-delete-btn');
+    const articleDeleteBtn = document.querySelector('#article-delete-btn');
     const articleModalCancelButton = document.querySelector('#article-cancel-btn');
     const articleModalCheckButton = document.querySelector('#article-check-btn');
     const articleModal = document.querySelector('.article-modal');
@@ -42,6 +52,11 @@ const init = async () => {
         dropdownContent.classList.toggle('active');
     })
 
+    // 로그아웃 클릭 이벤트
+    logoutBtn.addEventListener('click', async () => {
+        await logout();
+    })
+
     // 게시글 데이터 가져오기
     fetch("http://localhost:8000/articles/" + articleId)
         .then((res) => {
@@ -58,6 +73,14 @@ const init = async () => {
             document.getElementById('article-content').innerHTML = `${article.content}`;
             document.getElementById('view-count').innerHTML = calculateNum(article.view_count);
             document.getElementById('comment-count').innerHTML = calculateNum(article.comment_count);
+
+            if (userId == article.member_id) {
+                articleEditBtn.classList.remove('hidden');
+                articleDeleteBtn.classList.remove('hidden');
+            } else {
+                articleEditBtn.classList.add('hidden');
+                articleDeleteBtn.classList.add('hidden');
+            }
         })
         .catch((error) => {
             console.error('Error:', error.message);
@@ -275,7 +298,7 @@ const init = async () => {
     })
 
     // 게시글 모달창 이벤트
-    articleDeleteModalOpenButton.addEventListener('click', () => {
+    articleDeleteBtn.addEventListener('click', () => {
         articleModal.classList.remove('hidden');
     });
 
