@@ -70,7 +70,8 @@ const init = async () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newArticle)
+                body: JSON.stringify(newArticle),
+                credentials: 'include'
             })
             .then(res => {
                 if (!res.ok) {

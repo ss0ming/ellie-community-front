@@ -46,6 +46,21 @@ const init = async () => {
     const toastMessage = document.getElementById('toast-message');
     const blankPattern = /[\s]/g;
 
+    fetch(`http://localhost:8000/members/${userId}`)
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error('회원 정보를 가져오는데 실패했습니다.');
+            }
+            return res.json();
+        })
+        .then((member) => {
+            document.getElementById('email').innerHTML = `${member.email}`;
+            document.getElementById('nickname-input').value = `${member.nickname}`;
+        })
+        .catch((error) => {
+            console.error('Error: ',  error);
+        });
+
     const toastOn = () => {
         toastMessage.classList.add('active');
         setTimeout(function() {
@@ -58,11 +73,9 @@ const init = async () => {
             nicknameHelper.innerHTML = '* 닉네임을 입력해주세요.';
             return false;
         } else if (blankPattern.test(nickname.value) == true) {
-            console.log("1")
             nicknameHelper.innerHTML = '* 띄어쓰기를 없애주세요.';
             return false;
         } else if (nickname.value.length > 10) {
-            console.log("2")
             nicknameHelper.innerHTML = '* 닉네임은 최대 10자까지 가능합니다.';
             return false;
         }
@@ -86,10 +99,28 @@ const init = async () => {
     // 수정 완료 버튼 클릭 시 토스트 생성
     modifyBtn.addEventListener('click', () => {
         if (nicknameValidCheck()) {
-            toastOn();
+
+            const editNickname = { nickname: nickname.value };
+
+            fetch(`http://localhost:8000/members/${userId}/edit/nickname`,  {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(editNickname)
+            })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                toastOn();
+                return res.json();
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation: ', error);
+            });
         } 
     })
-
 }
 
 // 초기화 함수 호출

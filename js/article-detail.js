@@ -97,6 +97,7 @@ const init = async () => {
         })
         .then((comments) => {
             comments.forEach((comment) => {
+                console.log(comment);
                 addCommentBox(comment);
             });
         })
@@ -106,10 +107,8 @@ const init = async () => {
 
     // 댓글 박스 추가 
     const addCommentBox = (comment) => {
-        console.log(comment.member_id);
-        console.log(userId);
         const temp = document.createElement("div");
-        temp.innerHTML = `<div class="comment" data-id="${comment.id}">
+        temp.innerHTML = `<div class="comment" data-id="${comment.comment_id}">
                 <div class="comment-wrap-top">
                     <div class="comment-info">
                         <div class="comment-wrtier">
@@ -121,8 +120,8 @@ const init = async () => {
                         </div>
                     </div>
                     <div class="btns">
-                        <button class="comment-edit-btn small-btn" data-id="${comment.id}" ${userId == comment.member_id ?'' :'hidden'} type="button">수정</button>
-                        <button class="comment-delete-btn small-btn" data-id="${comment.id}" ${userId == comment.member_id ?'' :'hidden'} type="button">삭제</button>
+                        <button class="comment-edit-btn small-btn" data-id="${comment.comment_id}" ${userId == comment.member_id ?'' :'hidden'} type="button">수정</button>
+                        <button class="comment-delete-btn small-btn" data-id="${comment.comment_id}" ${userId == comment.member_id ?'' :'hidden'} type="button">삭제</button>
                     </div>
                 </div>
                 <div id="comment-content">${comment.content}</div>
@@ -150,13 +149,13 @@ const init = async () => {
 
     // 댓글 수정 이벤트
     const addCommentEditEvent = (button) => {
+        console.log(button.dataset.id);
         button.addEventListener('click', () => {
             commentRegisterBox.classList.add('hidden');
             commentModifyBox.classList.remove('hidden');
 
             fetch("http://localhost:8000/articles/" + articleId + "/comments/" + button.dataset.id)
                 .then((res) => {
-
                     if (!res.ok) {
                         throw new Error('댓글을 가져오는 데 실패했습니다.');
                     }
@@ -164,9 +163,8 @@ const init = async () => {
                 })
                 .then((comment) => {
                     commentModify.innerHTML = `${comment.content}`;
-                    commentModifyBox.setAttribute('data-id', comment.id);
-                }
-                )
+                    commentModifyBox.setAttribute('data-id', comment.comment_id);
+                })
                 .catch((error) => {
                     console.error('Error:', error.message);
                 });
@@ -187,7 +185,7 @@ const init = async () => {
 
             commentCheckButton.addEventListener('click', () => {
                 fetch("http://localhost:8000/articles/" + articleId + "/comments/" + button.dataset.id, {
-                    method: 'POST',
+                    method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -210,7 +208,7 @@ const init = async () => {
         });
     }
 
-    // 댓글 등록 이벤트
+    // 댓글 등록 유효성
     const commentRegisterValidate = () => {
         if (!comment.value) {
             commentRegisterButton.disabled = true;
@@ -223,34 +221,36 @@ const init = async () => {
 
     comment.addEventListener('input', commentRegisterValidate);
 
+    // 댓글 등록 이벤트
     commentRegisterButton.addEventListener('click', (e) => {
-        if (comment.value) {
-            const newComment = { content: comment.value };
+        
+        const newComment = { content: comment.value };
 
-            fetch("http://localhost:8000/articles/" + articleId + "/comments", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newComment)
-            })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                resetCommentRegister();
+        fetch("http://localhost:8000/articles/" + articleId + "/comments", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newComment),
+            credentials: 'include'
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            resetCommentRegister();
 
-                return res.json();
+            return res.json();
 
-            })
-            .then((data) => {
-                // 해당 등록된 댓글 보여주기
-                addCommentBox(data.data);
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-        }
+        })
+        .then((comment) => {
+            // 해당 등록된 댓글 보여주기
+            addCommentBox(comment);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+        
     });
 
     // 댓글 수정 후 이벤트
@@ -258,43 +258,39 @@ const init = async () => {
 
     commentModifyButton.addEventListener('click', () => {
 
-        if (commentModify.value) {
+        const editComment = { content: commentModify.value };
 
-            const editComment = { content: commentModify.value };
+        fetch("http://localhost:8000/articles/" + articleId + "/comments/" + commentModifyBox.getAttribute('data-id'), {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(editComment)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
 
-            fetch("http://localhost:8000/articles/" + articleId + "/comments/" + commentModifyBox.getAttribute('data-id'), {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(editComment)
-            })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Network response was not ok');
-                }
+            resetCommentModify();
 
-                resetCommentModify();
+            commentRegisterBox.classList.remove('hidden');
+            commentModifyBox.classList.add('hidden');
 
-                commentRegisterBox.classList.remove('hidden');
-                commentModifyBox.classList.add('hidden');
+            const commentElement = document.querySelector(`.comment[data-id="${commentModifyBox.getAttribute('data-id')}"]`);
+            if (commentElement) {
+                console.log(commentElement);
+                commentElement.querySelector('#comment-content').innerHTML = commentModify.value;
+            }
 
-
-                const commentElement = document.querySelector(`.comment[data-id="${commentModifyBox.getAttribute('data-id')}"]`);
-                if (commentElement) {
-                    console.log(commentElement);
-                    commentElement.querySelector('#comment-content').innerHTML = commentModify.value;
-                }
-
-                return res.json();
-            })
-            .then(data => {
-                console.log('Response from server:', data);
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-        }
+            return res.json();
+        })
+        .then(data => {
+            console.log('Response from server:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
     })
 
     // 게시글 모달창 이벤트
@@ -310,7 +306,7 @@ const init = async () => {
         articleModal.classList.add('hidden');
 
         fetch("http://localhost:8000/articles/" + articleId, {
-            method: 'POST',
+            method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -345,6 +341,8 @@ const init = async () => {
     // 댓글 수정 박스 초기화
     const resetCommentModify = () => {
         commentModify.innerHTML = '';
+        commentModifyButton.disabled = true;
+        commentModifyButton.classList.add("comment-modify-disable");
     }
 
     const calculateNum = num => {

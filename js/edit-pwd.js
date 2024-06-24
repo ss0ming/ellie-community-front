@@ -105,10 +105,26 @@ const init = async () => {
     repeat.addEventListener("input", validate);
 
     modifyBtn.addEventListener('click', () => {
-        toastMessage.classList.add('active');
-        setTimeout(function() {
-            toastMessage.classList.remove('active');
-        }, 1000) ;
+        const editPassword = { password: password.value };
+        fetch(`http://localhost:8000/members/${userId}/edit/password`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(editPassword)
+        })
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            toastMessage.classList.add('active');
+            setTimeout(function() {
+                toastMessage.classList.remove('active');
+            }, 1000);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation: ', error);
+        })
     })
 }
 
